@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "cp-githooks": "rm -f .git/hooks/* && cp resources/githooks/* .git/hooks/",
     "build-prod": "(export NODE_ENV=production && webpack --config resources/webpack/config.js)",
     "lint": "eslint src resources",
     "serve-dev": "http-server --cors -c-1 -p 8082",

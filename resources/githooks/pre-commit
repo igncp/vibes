@@ -1,0 +1,3 @@
+npm run lint && \
+  sh resources/scripts/generate-index.sh prod && \
+  git add index.html
