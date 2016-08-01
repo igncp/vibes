@@ -2,7 +2,9 @@ import React, {Component} from "react"
 
 import {Authenticated} from "./Authenticated"
 
-import {getCurrentAccessToken, redirectToAuth} from "./utils/auth"
+import {auth} from "./utils"
+
+const {getCurrentAccessToken, redirectToAuth} = auth
 
 export class App extends Component {
   constructor() {

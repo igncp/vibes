@@ -1,8 +1,5 @@
 {
   parser: "babel-eslint",
-  globals: {
-    "$": false,
-  },
   env: {
     browser: true,
     es6: true,
@@ -30,7 +27,7 @@
     "constructor-super": 2, // require super() calls in constructors
     "curly": 0, // enforce consistent brace style for all control statements
     "default-case": 2, // require default cases in switch statements
-    "dot-location": 2, // enforce consistent newlines before and after dots
+    "dot-location": [2, "property"], // enforce consistent newlines before and after dots
     "dot-notation": 2, // enforce dot notation whenever possible
     "eol-last": 2, // enforce at least one newline at the end of files
     "eqeqeq": 2, // require the use of === and !==
@@ -232,7 +229,7 @@
     "yield-star-spacing": 0, // require or disallow spacing around the * in yield* expressions
     "yoda": 0, // require or disallow “Yoda” conditions
 
-    "react/display-name": 2, // Prevent missing displayName in a React component definition
+    "react/display-name": 0, // Prevent missing displayName in a React component definition
     "react/forbid-prop-types": 0, // Forbid certain propTypes
     "react/no-danger": 2, // Prevent usage of dangerous JSX properties
     "react/no-deprecated": 2, // Prevent usage of deprecated methods

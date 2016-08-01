@@ -1,5 +1,4 @@
-export function getCurrentAccessToken() {
-  const url = window.location.href
+export const getCurrentAccessToken = ({url}) => () => {
   const results = /access_token=(.+)&/g.exec(url)
 
   if (!results) return null
@@ -8,13 +7,13 @@ export function getCurrentAccessToken() {
   return `access_token=${results[1]}`
 }
 
-export function redirectToAuth() {
-  setTimeout(() => {
-    window.location.replace(
+export const redirectToAuth = ({redirect, wait, url}) => () => {
+  wait(() => {
+    redirect(
       "https://secure.meetup.com/oauth2/authorize"
         + "?response_type=token"
         + "&client_id=9t3hah3e4qq4gv3lk5v54s0lds"
-        + "&redirect_uri=http://localhost:8082"
+        + `&redirect_uri=${url}`
         + "&scope=basic"
     )
   }, 1000)

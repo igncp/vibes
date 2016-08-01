@@ -19,11 +19,10 @@ cat > $ABSOLUTE_DIR/../../index.html <<EOL
 <head>
     <meta charset="UTF-8">
     <title>Vibes</title>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 </head>
 <body>
 <div id="main-vibes"></div>
-<script src="$INDEX_FILE.js"></script>
+<script src="dist/$INDEX_FILE.js"></script>
 </body>
 </html>
 EOL
