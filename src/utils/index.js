@@ -10,6 +10,6 @@ export const api = {
 }
 
 export const auth = {
-  redirectToAuth: redirectToAuth({redirect: window.location.replace, wait: setTimeout, url}),
+  redirectToAuth: redirectToAuth({redirect: window.location.replace.bind(window.location), wait: setTimeout, url}),
   getCurrentAccessToken: getCurrentAccessToken({url}),
 }
