@@ -1,0 +1,29 @@
+{
+  "name": "vibes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build-prod": "(export NODE_ENV=production && webpack --config resources/webpack/config.js)",
+    "lint": "eslint src resources",
+    "serve-dev": "http-server --cors -c-1 -p 8082",
+    "watch": "webpack --config resources/webpack/config.js -w"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-eslint": "^6.1.2",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-transform-class-properties": "^6.11.5",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "eslint": "^3.2.0",
+    "eslint-plugin-react": "^5.2.2",
+    "http-server": "^0.9.0",
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0",
+    "webpack": "^1.13.1"
+  }
+}
