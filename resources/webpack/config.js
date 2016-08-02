@@ -9,6 +9,15 @@ if (isProduction) {
     minimize: true,
   }))
 }
+
+plugins.push(
+  new webpack.DefinePlugin({
+    "process.env": {
+      NODE_ENV: process.env.NODE_ENV,
+    },
+  })
+)
+
 const filename = isProduction ? "index.min.js" : "index.js"
 const devtool = isProduction ? "cheap-module-source-map" : "source-map"
 
