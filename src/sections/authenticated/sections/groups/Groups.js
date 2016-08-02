@@ -1,8 +1,11 @@
 import React, {Component, PropTypes} from "react"
+import {observer} from "mobx-react"
 
-import {api} from "./utils"
+import {domainStore} from "../../../../stores"
 
-import {Button} from "./Button"
+import {api} from "../../../../utils"
+
+import {Button} from "../../../../components/Button"
 
 function GroupsList({groups}) {
   return (
@@ -17,11 +20,8 @@ GroupsList.propTypes = {
   groups: PropTypes.array,
 }
 
+@observer
 export class Groups extends Component {
-  static propTypes = {
-    token: PropTypes.string,
-  }
-
   constructor() {
     super()
 
@@ -29,22 +29,20 @@ export class Groups extends Component {
       form: {
         postcode: null,
       },
-      groups: [],
     }
   }
 
   handleSearch = () => {
     const postcode = this.state.form.postcode
-    const token = this.props.token
 
-    api.findGroups({postcode, token})
-      .then(groups => this.setState({groups}))
+    if (!postcode) return
+
+    api.findGroups({postcode})
+      .then(groups => domainStore.actions.setGroups(groups))
   }
 
   handleClear = () => {
-    this.setState({
-      groups: [],
-    })
+    domainStore.actions.resetGroups()
   }
 
   render() {
@@ -64,9 +62,10 @@ export class Groups extends Component {
           <Button onClick={this.handleClear}>Clear</Button>
         </p>
         <div>
-          <GroupsList groups={this.state.groups} />
+          <GroupsList groups={domainStore.groups.slice()} />
         </div>
       </div>
     )
   }
 }
+

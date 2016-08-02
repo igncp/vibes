@@ -1,0 +1,1 @@
+export {domainStore} from "./domain"

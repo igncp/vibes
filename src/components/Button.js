@@ -8,6 +8,7 @@ const handleOnClick = onClick => (e) => {
 export function Button({onClick, children}) {
   return (
     <a
+      className="btn btn-default"
       href="#"
       onClick={handleOnClick(onClick)}
     >{children}</a>
