@@ -5,12 +5,15 @@ const handleOnClick = onClick => (e) => {
   onClick && onClick()
 }
 
-export function Button({onClick, children}) {
+export function Button({onClick, children, visibility}) {
   return (
     <a
       className="btn btn-default"
       href="#"
       onClick={handleOnClick(onClick)}
+      style={{
+        visibility: visibility || "visible",
+      }}
     >{children}</a>
   )
 }
@@ -18,4 +21,5 @@ export function Button({onClick, children}) {
 Button.propTypes = {
   children: PropTypes.node,
   onClick: PropTypes.func,
+  visibility: PropTypes.string,
 }

@@ -1,5 +1,5 @@
 npm run lint && \
   npm run build-prod && \
-  git add dist/index.min.js && \
+  git add build/index.min.js && \
   sh resources/scripts/generate-index.sh prod && \
   git add index.html

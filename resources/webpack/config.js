@@ -26,7 +26,7 @@ module.exports = {
   entry: `${__dirname}/../../src/index.js`,
   plugins,
   output: {
-    path: `${__dirname}/../../dist`,
+    path: `${__dirname}/../../build`,
     filename,
   },
   module: {
@@ -34,9 +34,15 @@ module.exports = {
       test: /\.jsx?$/,
       exclude: /(node_modules|bower_components)/,
       loader: "babel",
+    }, {
+      test: /\.css?$/,
+      loader: "style!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss",
     }],
   },
   resolve: {
     extensions: ["", ".webpack.js", ".web.js", ".js", ".jsx"],
   },
+  postcss: [
+    require("autoprefixer"),
+  ],
 }

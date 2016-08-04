@@ -1,5 +1,5 @@
 *.log
-/dist/index.js
-/dist/index.js.map
-/dist/index.min.js.map
+/build/index.js
+/build/index.js.map
+/build/index.min.js.map
 node_modules

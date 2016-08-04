@@ -25,7 +25,7 @@ cat > $ABSOLUTE_DIR/../../index.html <<EOL
 </head>
 <body>
 <div id="main-vibes"></div>
-<script src="dist/$INDEX_FILE.js"></script>
+<script src="build/$INDEX_FILE.js"></script>
 </body>
 </html>
 EOL
