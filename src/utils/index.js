@@ -1,7 +1,7 @@
-import {getJSON} from "jquery"
-
 import {redirectToAuthWithoutDeps, getCurrentAccessTokenWithoutDeps, logoutWithoutDeps} from "./auth"
 import {getApi} from "./api"
+
+const {getJSON} = $
 
 const url = window.location.href
 const redirect = window.location.replace.bind(window.location)

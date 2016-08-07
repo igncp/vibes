@@ -5,6 +5,9 @@
     es6: true,
     node: true,
   },
+  globals: {
+    $: false,
+  },
   rules: {
     "accessor-pairs": 0, // enforce getter and setter pairs in objects
     "array-bracket-spacing": [2, "never"], // enforce consistent spacing inside array brackets
