@@ -258,7 +258,7 @@
     "react/jsx-equals-spacing": 2, // Enforce or disallow spaces around equal signs in JSX attributes (fixable)
     "react/jsx-filename-extension": 0, // Restrict file extensions that may contain JSX
     "react/jsx-first-prop-new-line": 2, // Enforce position of the first prop in JSX
-    "react/jsx-handler-names": 2, // Enforce event handler naming conventions in JSX
+    "react/jsx-handler-names": 0, // Enforce event handler naming conventions in JSX
     "react/jsx-indent": 0, // Validate JSX indentation
     "react/jsx-indent-props": 0, // Validate props indentation in JSX (fixable)
     "react/jsx-key": 2, // Validate JSX has key prop when in array or iterator

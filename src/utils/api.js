@@ -1,9 +1,27 @@
+import {compose, contains} from "ramda"
+
 import {domainStore} from "../stores"
 
 const API_URL = "https://api.meetup.com/"
 
-export const findGroups = ({get}) => ({postcode}) => {
-  const token = domainStore.token
-
-  return get(`${API_URL}find/groups?photo-host=public&zip=${postcode}&page=20&${token}`)
+const buildRequestUrl = (uri, token) => {
+  const separator = contains("?", uri) ? "&" : "?"
+  return `${API_URL}${uri}${separator}${token}`
 }
+
+export const getApi = ({get}) => {
+  const getUrl = compose(get, buildRequestUrl)
+
+  return {
+    findGroups: ({postcode, offset}) => {
+      const PAGES_PER_REQUEST = 20
+      return getUrl(
+        `find/groups?photo-host=public&zip=${postcode}&page=${PAGES_PER_REQUEST}&offset=${offset}`,
+        domainStore.token
+      )
+    },
+    findGroupDetail: ({urlname}) => getUrl(`${urlname}`, domainStore.token),
+    getSelfProfile: () => getUrl("members/self", domainStore.token),
+  }
+}
+

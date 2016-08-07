@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "cp-githooks": "rm -f .git/hooks/* && cp resources/githooks/* .git/hooks/",
+    "build-dev": "webpack --config resources/webpack/config.js",
     "build-prod": "(rm -rf build && export NODE_ENV=production && webpack --config resources/webpack/config.js)",
     "generate-index-dev": "sh resources/scripts/generate-index.sh dev",
     "lint": "eslint src resources",
@@ -32,8 +33,10 @@
     "mobx": "^2.4.1",
     "mobx-react": "^3.5.3",
     "postcss-loader": "^0.9.1",
+    "ramda": "^0.22.0",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
+    "react-router": "^2.6.1",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.1"
   }

@@ -1,13 +1,29 @@
-import React from "react"
-import {observer} from "mobx-react"
+import React, {PropTypes} from "react"
 
-import {Groups} from "./sections/groups/Groups"
-import {SimpleLayout} from "../../components/SimpleLayout"
+import {BaseLayout} from "../../components/BaseLayout"
+import {NavBarButton} from "../../components/NavBarButton"
 
-export const Authenticated = observer(function() {
+import {auth} from "../../utils"
+
+export function Authenticated({children}) {
   return (
-    <SimpleLayout>
-      <Groups />
-    </SimpleLayout>
+    <BaseLayout
+      navBarButtons={[
+        <NavBarButton
+          key="profile-button"
+          link="profile"
+        >Profile</NavBarButton>,
+        <NavBarButton
+          key="logout-button"
+          onClick={auth.logout}
+        >Log Out</NavBarButton>,
+      ]}
+    >
+      {children}
+    </BaseLayout>
   )
-})
+}
+
+Authenticated.propTypes = {
+  children: PropTypes.node.isRequired,
+}

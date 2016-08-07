@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from "react"
+import React, {Component} from "react"
 import {observer} from "mobx-react"
 
 import {domainStore} from "../../../../stores"
@@ -8,23 +8,9 @@ import {api} from "../../../../utils"
 import {Button} from "../../../../components/Button"
 import {Spinner} from "../../../../components/spinner/Spinner"
 
-const styles = getInlineStyles()
+import {GroupsList} from "./components/GroupsList"
 
-function GroupsList({groups}) {
-  return (
-    <ul className="list-group">{groups.map((group) => {
-      return (
-        <li
-          className="list-group-item"
-          key={group.id}
-        >{group.name}</li>
-      )
-    })}</ul>
-  )
-}
-GroupsList.propTypes = {
-  groups: PropTypes.array,
-}
+const styles = getInlineStyles()
 
 @observer
 export class Groups extends Component {
@@ -33,28 +19,68 @@ export class Groups extends Component {
 
     this.state = {
       isFetching: false,
+      query: {
+        postcode: null,
+        offset: null,
+      },
       form: {
         postcode: null,
       },
     }
   }
 
-  handleSearch = () => {
-    const postcode = this.state.form.postcode
+  componentWillMount() {
+    window.addEventListener("scroll", this.scrollListener)
+  }
 
-    if (!postcode) return
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.scrollListener)
+  }
 
+  scrollListener = () => {
+    const SCROLL_GAP = 300
+    if ((window.innerHeight + window.scrollY) >= (document.body.scrollHeight - SCROLL_GAP)) {
+      if (!this.state.isFetching) {
+        const offset = this.state.query.offset + 1
+        const postcode = this.state.query.postcode
+        this.setState({
+          query: {postcode, offset},
+        })
+
+        this.findGroups({postcode, offset})
+      }
+    }
+  }
+
+  findGroups = ({postcode, offset}) => {
     this.setState({isFetching: true})
-    api.findGroups({postcode})
-      .then(groups => {
-        domainStore.actions.setGroups(groups)
+
+    api.findGroups({postcode, offset})
+      .then((groups) => {
+        domainStore.actions.concatGroups(groups)
         this.setState({isFetching: false})
       })
   }
 
+  handleSearch = () => {
+    const postcode = this.state.form.postcode
+    const offset = 0
+
+    if (!postcode) return
+
+    this.setState({
+      query: {postcode, offset},
+    })
+
+    this.findGroups({postcode, offset})
+  }
+
   handleClear = () => {
     domainStore.actions.resetGroups()
-    this.setState({form: {postcode: ""}})
+    this.setState({
+      form: {postcode: ""},
+      query: null,
+    })
   }
 
   getSpinnerCompIfNecessary = () => {
@@ -82,6 +108,8 @@ export class Groups extends Component {
   }
 
   render() {
+    const groups = domainStore.groups.slice()
+
     return (
       <div>
         <p>Enter your postcode to find groups:</p>
@@ -99,8 +127,14 @@ export class Groups extends Component {
           <Button onClick={this.handleClear}>Clear</Button>
         </div>
         <div style={styles.groupsListWrapper}>
-          <GroupsList groups={domainStore.groups.slice()} />
+          {groups.length ? (
+            <p>Groups displayed: {groups.length}</p>
+          ) : null}
+          <GroupsList groups={groups} />
         </div>
+        {!!this.state.isFetching && domainStore.groups.length > 0 ? (
+          <Spinner />
+        ) : null}
       </div>
     )
   }

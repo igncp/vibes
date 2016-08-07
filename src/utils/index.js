@@ -1,15 +1,19 @@
 import {getJSON} from "jquery"
 
-import {redirectToAuth, getCurrentAccessToken} from "./auth"
-import {findGroups} from "./api"
+import {redirectToAuthWithoutDeps, getCurrentAccessTokenWithoutDeps, logoutWithoutDeps} from "./auth"
+import {getApi} from "./api"
 
 const url = window.location.href
+const redirect = window.location.replace.bind(window.location)
+const alert = window.alert
+const reload = window.location.reload.bind(window.location)
+const ls = window.localStorage
+const delay = window.setTimeout
 
-export const api = {
-  findGroups: findGroups({get: getJSON}),
-}
+export const api = getApi({get: getJSON})
 
 export const auth = {
-  redirectToAuth: redirectToAuth({redirect: window.location.replace.bind(window.location), wait: setTimeout, url}),
-  getCurrentAccessToken: getCurrentAccessToken({url}),
+  getCurrentAccessToken: getCurrentAccessTokenWithoutDeps({url, redirect, alert, reload, ls, delay}),
+  logout: logoutWithoutDeps({ls, reload}),
+  redirectToAuth: redirectToAuthWithoutDeps({redirect, url}),
 }

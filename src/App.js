@@ -1,23 +1,14 @@
 import React from "react"
 
-import {Authenticated} from "./sections/authenticated/Authenticated"
-import {Unauthenticated} from "./sections/unauthenticated/Unauthenticated"
-
 import {domainStore} from "./stores"
-
 import {auth} from "./utils"
 
-const {redirectToAuth, getCurrentAccessToken} = auth
-domainStore.actions.setToken(getCurrentAccessToken())
+domainStore.actions.setToken(auth.getCurrentAccessToken())
 
-if (!domainStore.token) redirectToAuth()
+import {AppRouter} from "./AppRouter"
 
 export function App() {
-  const Component = (!domainStore.token)
-    ? Unauthenticated
-    : Authenticated
-
   return (
-    <Component />
+    <AppRouter />
   )
 }
