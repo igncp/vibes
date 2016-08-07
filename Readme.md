@@ -12,7 +12,7 @@ Requirements: Unix environment, Node v6 with NPM.
 
 Run the following script:
 ```sh
-git clone https://github.com/igncp/vibes.git` && \
+git clone https://github.com/igncp/vibes.git && \
   cd vibes && \
   npm i && \
   npm run build-dev && \
