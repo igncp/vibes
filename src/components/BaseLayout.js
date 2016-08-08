@@ -1,6 +1,6 @@
 import React, {PropTypes} from "react"
 
-import {NavBar} from "./NavBar"
+import {NavBar} from "./nav-bar/NavBar"
 
 export function BaseLayout({navBarButtons, children}) {
   return (

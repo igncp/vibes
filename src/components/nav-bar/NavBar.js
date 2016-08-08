@@ -1,6 +1,12 @@
 import React, {PropTypes} from "react"
 import {Link} from "react-router"
 
+import styles from "./styles.css"
+
+function onGitHubIconClick() {
+  window.open("https://github.com/igncp/vibes")
+}
+
 export function NavBar({children}) {
   return (
     <nav className="navbar navbar-default">
@@ -20,6 +26,11 @@ export function NavBar({children}) {
               className="navbar-brand"
               to="/"
             >Vibes</Link>
+            <span
+              className={`fa fa-github ${styles.githubIcon}`}
+              onClick={onGitHubIconClick}
+              title="Repository"
+            />
         </div>
         <div
           className="collapse navbar-collapse"

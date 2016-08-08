@@ -9,6 +9,7 @@ import {domainStore} from "../../../../stores"
 import {Button} from "../../../../components/Button"
 import {MembersCountTag} from "../../components/MembersCountTag"
 import {Spinner} from "../../../../components/spinner/Spinner"
+import {ShowcasePhoto} from "../../../../components/ShowcasePhoto"
 
 const parseDescription = compose(
   replace(/<\/?(p|span|br|b|strong|a)(.*?)>/g, ""),
@@ -70,14 +71,7 @@ export class GroupDetail extends Component {
               </div>
               <div className="panel-body">
                 <p style={inlineStyles.description}>{parseDescription(groupDetail.description)}</p>
-                {groupDetail.key_photo && groupDetail.key_photo.photo_link ? (
-                  <p style={inlineStyles.groupPhotoWrapper}>
-                    <img
-                      src={groupDetail.key_photo.photo_link}
-                      style={inlineStyles.groupPhoto}
-                    />
-                  </p>
-                ) : null}
+                <ShowcasePhoto src={groupDetail.key_photo ? groupDetail.key_photo.photo_link : null} />
                 <p><Button onClick={() => window.open(groupDetail.link)}>Open in Meetup</Button></p>
               </div>
             </div>
@@ -105,14 +99,6 @@ function getInlineStyles() {
     membersCountTag: {
       position: "absolute",
       right: 30,
-    },
-    groupPhotoWrapper: {
-      textAlign: "center",
-    },
-    groupPhoto: {
-      borderRadius: 10,
-      maxWidth: 300,
-      boxShadow: "0 0 10px 1px #aaa",
     },
   }
 }

@@ -12,6 +12,9 @@ import {GroupsList} from "./components/GroupsList"
 
 const styles = getInlineStyles()
 
+let canUpdateGroups
+const SCROLL_GAP = 300
+
 @observer
 export class Groups extends Component {
   constructor() {
@@ -30,16 +33,17 @@ export class Groups extends Component {
   }
 
   componentWillMount() {
+    canUpdateGroups = true
     window.addEventListener("scroll", this.scrollListener)
   }
 
   componentWillUnmount() {
+    canUpdateGroups = false
     window.removeEventListener("scroll", this.scrollListener)
   }
 
   scrollListener = () => {
-    const SCROLL_GAP = 300
-    if ((window.innerHeight + window.scrollY) >= (document.body.scrollHeight - SCROLL_GAP)) {
+    if (canUpdateGroups && (window.innerHeight + window.scrollY) >= (document.body.scrollHeight - SCROLL_GAP)) {
       if (!this.state.isFetching) {
         const offset = this.state.query.offset + 1
         const postcode = this.state.query.postcode
@@ -58,7 +62,10 @@ export class Groups extends Component {
     api.findGroups({postcode, offset})
       .then((groups) => {
         domainStore.actions.concatGroups(groups)
-        this.setState({isFetching: false})
+
+        if (canUpdateGroups) {
+          this.setState({isFetching: false})
+        }
       })
   }
 

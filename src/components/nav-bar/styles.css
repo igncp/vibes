@@ -1,0 +1,16 @@
+.githubIcon {
+  cursor: pointer;
+  font-size: 35;
+  opacity: 0.3;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  transform: perspective(1px) translateY(-50%);
+  width: 40;
+  transition: all linear 1s;
+  color: #92bbd4;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
