@@ -18,16 +18,13 @@ plugins.push(
   })
 )
 
-const filename = isProduction ? "index.min.js" : "index.js"
-const devtool = isProduction ? "cheap-module-source-map" : "source-map"
-
 module.exports = {
-  devtool,
+  devtool: isProduction ? "cheap-module-source-map" : "source-map",
   entry: `${__dirname}/../../src/index.js`,
   plugins,
   output: {
     path: `${__dirname}/../../build`,
-    filename,
+    filename: isProduction ? "index.min.js" : "index.js",
   },
   module: {
     loaders: [{
@@ -35,7 +32,7 @@ module.exports = {
       exclude: /(node_modules|bower_components)/,
       loader: "babel",
     }, {
-      test: /\.css?$/,
+      test: /\.css$/,
       loader: "style!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss",
     }],
   },
