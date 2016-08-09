@@ -17,3 +17,5 @@ export const auth = {
   logout: logoutWithoutDeps({ls, reload}),
   redirectToAuth: redirectToAuthWithoutDeps({redirect, url}),
 }
+
+export {timestampToDate} from "./timestampToDate"

@@ -21,6 +21,7 @@ export const getApi = ({get}) => {
       )
     },
     findGroupDetail: ({urlname}) => getUrl(`${urlname}`, domainStore.token),
+    findEventDetail: ({urlname, id}) => getUrl(`${urlname}/events/${id}`, domainStore.token),
     getSelfProfile: () => getUrl("members/self", domainStore.token),
   }
 }

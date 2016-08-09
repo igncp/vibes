@@ -15,11 +15,5 @@ domainStore.actions = {
   @action concatGroups: groups => domainStore.groups = domainStore.groups.concat(groups),
   @action setGroupDetail: groupDetail => domainStore.groupDetail = groupDetail,
   @action setProfile: profile => domainStore.profile = profile,
-  @action setGroupDetailFromGroups: (urlname, onNotFound) => {
-    const findGroup = find(whereEq({urlname}))
-    const group = findGroup(domainStore.groups)
-
-    if (!group) onNotFound()
-    else domainStore.groupDetail = group
-  },
+  @action getGroupDetailFromGroups: urlname => find(whereEq({urlname}))(domainStore.groups),
 }
